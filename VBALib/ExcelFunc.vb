@@ -16,4 +16,3 @@ Function Num2Col(n As Integer)
     sPre = sPre & c
     Num2Col = sPre
 End Function
-
