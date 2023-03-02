@@ -13,7 +13,7 @@ Sub ScheduleGenerator()
 
     For i = 0 To nCellNum - 1
         '  move to top
-        ActiveSheet.Cells(sCells(i * 2), nRow).Value = ActiveSheet.Cells(sCells(i * 2), sCells(i * 2 + 1)).Value
+        ActiveSheet.Cells(nRow, sCells(i * 2)).Value = ActiveSheet.Cells(sCells(i * 2 + 1), sCells(i * 2)).Value
     Next
 
     '  delete cols without specific name
