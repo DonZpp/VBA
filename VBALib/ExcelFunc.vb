@@ -17,6 +17,7 @@ Function Num2Col(n As Long)
     Num2Col = strPre
 End Function
 
+
 ' locate cells within pointed words
 Function CellsLocate(sUsedRange As Range, strName As String, nCellNum As Long, sCellPos() As Long)
     nCellNum = 0
@@ -29,23 +30,38 @@ Function CellsLocate(sUsedRange As Range, strName As String, nCellNum As Long, s
     Next
 End Function
 
+
 ' Get Last Row Number in a Range
 Function LastRowNumInRange(sRange As Range) As Long
     LastRowNumInRange = sRange.Row + sRange.Rows.Count - 1
 End Function
 
-' Delete a column
-Function DeleteColumn(nCol As Long, xlTo As Long)
-    Dim strColName As String
-    strColName = Num2Col(nCol)
-    Columns(strColName & ":" & strColName).Select
-    Selection.Delete Shift:=xlTo
+
+' Get number of cells contained in sRange.
+Function CellsCount(sRange As Range)
+    CellsCount = sRange.Count
 End Function
 
-' Delete a row
-Function DeleteRow(nRow As Long , xlTo As Long)
-    Dim strRow As String
-    strRow = CStr(nRow)
-    Rows(strRow & ":" & strRow).Select
-    Selection.Delete Shift := xlTo
+
+' Check if the cell is the first cell in a merged cell
+Function IsFirstCellInMerge(sRange As Range)
+    If sRange.MergeCells AND sRange.MergeArea.Cells(1).Address = sRange.Address Then
+        IsFirstCellInMerge = True
+    Else
+        IsFirstCellInMerge = False
+    End If
+End Function
+
+
+' Check if two cell in one Merged Cell
+Function IsInOneCell(sCell1 As Range, sCell2 As Range)
+    If NOT sCell1.MergeCells OR NOT sCell2.MergeCells Then
+        IsInOneCell = False
+    End If
+
+    If sCell1.MergeArea.Cells(1).Address = sCell2.MergeArea.Cell(1).Address Then
+        IsInOneCell = True
+    Else
+        IsInOneCell = False
+    End If
 End Function
